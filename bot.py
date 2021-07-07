@@ -15,15 +15,15 @@ TOKEN = '1852389998:AAFL2-VSnEUbSEaZPF552OrDd2SUk_qvW8I'
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    update.message.reply_text('Hello friends, my name is Xenia and I am here to provide friendly reminders! :)')
 
 def help(update, context):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    update.message.reply_text('Type /register to register your username to the bot to start receiving monthly reminders.')
 
 def echo(update, context):
     """Echo the user message."""
-    update.message.reply_text(update.message.text)
+    update.message.reply_text("Hello friends, my name is Xenia and I am here to provide friendly reminders! :) Type /start to begin")
 
 def error(update, context):
     """Log Errors caused by Updates."""
