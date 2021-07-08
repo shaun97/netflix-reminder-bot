@@ -21,7 +21,8 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     user_id = update.message.from_user
-    sf.insert_user(conn, user_id)
+    print(user_id)
+    # sf.insert_user(conn, user_id)
     update.message.reply_text('Hello friends, my name is Xenia and I am here to provide friendly reminders! :)')
 
 def help(update, context):
