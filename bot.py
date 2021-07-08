@@ -2,7 +2,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
 import psycopg2
-import sql_functions
+import sql_functions as sf
 
 PORT = int(os.environ.get('PORT', 5000))
 DATABASE_URL = os.environ['DATABASE_URL']
@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     user_id = update.message.from_user
-    insert_user(conn, user_id)
+    sf.insert_user(conn, user_id)
     update.message.reply_text('Hello friends, my name is Xenia and I am here to provide friendly reminders! :)')
 
 def help(update, context):
