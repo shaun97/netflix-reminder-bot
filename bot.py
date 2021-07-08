@@ -1,20 +1,27 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-import os
+import psycopg2-binary
+import sql_functions
+
 PORT = int(os.environ.get('PORT', 5000))
+DATABASE_URL = os.environ['DATABASE_URL']
+TOKEN = os.environ['BOT_TOKEN']
+
+# Connect to DB
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-TOKEN = os.environ['BOT_TOKEN']
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
-    """Send a message when the command /start is issued."""
+    user_id = update.message.from_user
+    insert_user(conn, user_id)
     update.message.reply_text('Hello friends, my name is Xenia and I am here to provide friendly reminders! :)')
 
 def help(update, context):
