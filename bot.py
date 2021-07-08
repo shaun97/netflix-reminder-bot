@@ -1,7 +1,7 @@
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import os
-import psycopg2-binary
+import psycopg2
 import sql_functions
 
 PORT = int(os.environ.get('PORT', 5000))
