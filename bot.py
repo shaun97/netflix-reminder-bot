@@ -46,7 +46,7 @@ def general(update, context):
     user_id = update.message.from_user.id
 
     if msg == "I am xenia":
-        sf.set_admin(user_id)
+        sf.set_admin(conn, user_id)
         update.message.reply_text("Hello Xenia")
     else:
         update.message.reply_text("Hello friends, my name is Xenia and I am here to provide friendly reminders! :) Type /start to begin")
