@@ -4,6 +4,7 @@ def create_tables(conn):
     commands = ("""
         CREATE TABLE users (
             user_id VARCHAR(255) PRIMARY KEY,
+            user_name VARCHAR(255),
             first_name VARCHAR(255),
             reminder_on BOOLEAN,
             under_who VARCHAR(255)
@@ -25,10 +26,10 @@ def create_tables(conn):
     cur.close()
     conn.commit()
 
-def insert_user(conn, user_id, first_name):
+def insert_user(conn, user_id, user_name, first_name):
     command = f"""
-        INSERT INTO users (user_id, first_name)
-        VALUES ({user_id}, {first_name})
+        INSERT INTO users (user_id, user_name, first_name)
+        VALUES ({user_id}, '{user_name}', '{first_name}')
     """
 
     cur = conn.cursor()
