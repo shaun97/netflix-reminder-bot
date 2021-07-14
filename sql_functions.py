@@ -49,7 +49,7 @@ def toggle_reminder(conn, user_id):
     # gets the current setting
     curr_setting = cur.fetchone()[0]
     new_setting = not curr_setting
-    print(curr_setting[1])
+    print(curr_setting)
 
     command = f"""
         UPDATE users
