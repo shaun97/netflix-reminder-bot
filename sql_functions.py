@@ -8,7 +8,7 @@ def create_tables(conn):
             first_name VARCHAR(255),
             reminder_on BOOLEAN,
             under_who VARCHAR(255)
-        )
+        );
     """,
     """
     CREATE TABLE settings (
@@ -16,7 +16,7 @@ def create_tables(conn):
         message TEXT,
         frequency TEXT,
         time INT
-    )
+    );
     """
     )
 
@@ -29,7 +29,7 @@ def create_tables(conn):
 def insert_user(conn, user_id, user_name, first_name):
     command = f"""
         INSERT INTO users (user_id, user_name, first_name)
-        VALUES ({user_id}, '{user_name}', '{first_name}')
+        VALUES ({user_id}, '{user_name}', '{first_name}', false);
     """
 
     cur = conn.cursor()
@@ -42,7 +42,7 @@ def toggle_reminder(conn, user_id):
     command = f"""
         SELECT reminder_on
         FROM users
-        WHERE user_id={user_id}
+        WHERE user_id={user_id};
     """
     cur = conn.cursor()
     # cur.execute(command)
