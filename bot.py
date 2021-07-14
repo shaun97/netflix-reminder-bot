@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     user_id = update.message.from_user.id
-    user_name = update.message.from_user.user_name
+    user_name = update.message.from_user.username
     first_name = update.message.from_user.first_name
 
     sf.insert_user(conn, user_id, user_name, first_name)
@@ -77,5 +77,4 @@ def main():
     updater.idle()
 
 if __name__ == '__main__':
-    sf.create_tables(conn)
     main()
