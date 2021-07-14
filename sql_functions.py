@@ -31,11 +31,14 @@ def insert_user(conn, user_id, user_name, first_name):
         INSERT INTO users (user_id, user_name, first_name, reminder_on)
         VALUES ({user_id}, '{user_name}', '{first_name}', false);
     """
-
     cur = conn.cursor()
-    cur.execute(command)
-    cur.close()
-    conn.commit()
+    try:
+        cur.execute(command)
+        cur.close()
+        conn.commit()
+    except psycopg2.Error as e:
+        conn.rollback()
+
 
 ## check if reminder already set and toggle.
 def toggle_reminder(conn, user_id):
@@ -56,6 +59,9 @@ def toggle_reminder(conn, user_id):
         SET reminder_on={new_setting}
         WHERE user_id='{user_id}';
     """
-    cur.execute(command)
-    cur.close()
-    conn.commit()
+    try:
+        cur.execute(command)
+        cur.close()
+        conn.commit()
+    except psycopg2.Error as e:
+        conn.rollback()
