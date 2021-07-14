@@ -73,7 +73,7 @@ def set_admin(conn, user_id):
 
     command = f"""
         INSERT INTO users (user_id)
-        VALUES ({user_id});
+        VALUES ('{user_id})';
     """
 
     cur = conn.cursor()
