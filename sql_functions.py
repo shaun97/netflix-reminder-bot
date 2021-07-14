@@ -42,7 +42,7 @@ def toggle_reminder(conn, user_id):
     command = f"""
         SELECT reminder_on
         FROM users
-        WHERE user_id={user_id};
+        WHERE user_id='{user_id}';
     """
     cur = conn.cursor()
     # cur.execute(command)
