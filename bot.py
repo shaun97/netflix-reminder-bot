@@ -21,10 +21,10 @@ logger = logging.getLogger(__name__)
 # context. Error handlers also receive the raised TelegramError object in error.
 def start(update, context):
     user_id = update.message.from_user.id
-    user_name = update.message.from_user.first_name
+    first_name = update.message.from_user.first_name
 
-    sf.insert_user(conn, user_id, user_name)
-    update.message.reply_text(f'Hello {user_name}, my name is Xenia and I am here to provide friendly reminders! :)')
+    sf.insert_user(conn, user_id, first_name)
+    update.message.reply_text(f'Hello {first_name}, my name is Xenia and I am here to provide friendly reminders! :)')
 
 def help(update, context):
     """Send a message when the command /help is issued."""
@@ -76,4 +76,5 @@ def main():
     updater.idle()
 
 if __name__ == '__main__':
+    sf.create_tables(conn)
     main()
