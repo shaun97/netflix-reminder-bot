@@ -33,8 +33,12 @@ def help(update, context):
 
 def register_reminder(update, context):
     user_id = update.message.from_user.id
-    sf.toggle_reminder(conn, user_id)
-    update.message.reply_text('Your reminders has been turned {}')
+    is_reminder_on = sf.toggle_reminder(conn, user_id)
+    if (is_reminder_on):
+        msg = "on"
+    else:
+        msg = "off"
+    update.message.reply_text(f'Your reminders has been turned {msg}')
 
 def echo(update, context):
     """Echo the user message."""

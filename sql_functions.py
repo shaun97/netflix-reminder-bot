@@ -63,5 +63,7 @@ def toggle_reminder(conn, user_id):
         cur.execute(command)
         cur.close()
         conn.commit()
+        return new_setting
     except psycopg2.Error as e:
         conn.rollback()
+        return curr_setting
