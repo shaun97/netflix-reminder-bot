@@ -34,15 +34,33 @@ def help(update, context):
 def register_reminder(update, context):
     user_id = update.message.from_user.id
     is_reminder_on = sf.toggle_reminder(conn, user_id)
-    if (is_reminder_on):
+    if is_reminder_on:
         msg = "on"
     else:
         msg = "off"
     update.message.reply_text(f'Your reminders has been turned {msg}')
 
-def echo(update, context):
-    """Echo the user message."""
-    update.message.reply_text("Hello friends, my name is Xenia and I am here to provide friendly reminders! :) Type /start to begin")
+def general(update, context):
+    print(update.message.text)
+    msg = update.message.text
+    user_id = update.message.from_user.id
+
+    if msg == "I am xenia":
+        sf.set_admin(user_id)
+        update.message.reply_text("Hello Xenia")
+    else:
+        update.message.reply_text("Hello friends, my name is Xenia and I am here to provide friendly reminders! :) Type /start to begin")
+
+# Xenia commands
+
+def set_message(update, context):
+    pass
+def set_frequency(update, context):
+    pass
+def set_time(update, context):
+    pass
+def set_remindees(update, context):
+    pass
 
 def error(update, context):
     """Log Errors caused by Updates."""
@@ -58,13 +76,19 @@ def main():
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
 
-    # on different commands - answer in Telegram
+    # General commands
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("reminder", register_reminder))
 
+    # Xenia commands
+    dp.add_handler(CommandHandler("set_message", set_message))
+    dp.add_handler(CommandHandler("set_frequency", set_frequency))
+    dp.add_handler(CommandHandler("set_time", set_time))
+    dp.add_handler(CommandHandler("set_remindees", set_remindees))
+
     # on noncommand i.e message - echo the message on Telegram
-    dp.add_handler(MessageHandler(Filters.text, echo))
+    dp.add_handler(MessageHandler(Filters.text, general))
 
     # log all errors
     dp.add_error_handler(error)

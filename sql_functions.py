@@ -67,3 +67,19 @@ def toggle_reminder(conn, user_id):
     except psycopg2.Error as e:
         conn.rollback()
         return curr_setting
+
+def set_admin(conn, user_id):
+    print(f"setting {user_id} as admin")
+
+    command = f"""
+        INSERT INTO users (user_id)
+        VALUES ({user_id});
+    """
+
+    cur = conn.cursor()
+    try:
+        cur.execute(command)
+        cur.close()
+        conn.commit()
+    except psycopg2.Error as e:
+        conn.rollback()
