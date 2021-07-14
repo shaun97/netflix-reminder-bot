@@ -22,13 +22,18 @@ logger = logging.getLogger(__name__)
 def start(update, context):
     user_id = update.message.from_user.id
     user_name = update.message.from_user.first_name
-    print(user_id)
-    sf.insert_user(conn, user_id)
-    update.message.reply_text('Hello friends, my name is Xenia and I am here to provide friendly reminders! :)')
+
+    sf.insert_user(conn, user_id, user_name)
+    update.message.reply_text(f'Hello {user_name}, my name is Xenia and I am here to provide friendly reminders! :)')
 
 def help(update, context):
     """Send a message when the command /help is issued."""
     update.message.reply_text('Type /register to register your username to the bot to start receiving monthly reminders.')
+
+def register_reminder(update, context):
+    user_id = update.message.from_user.id
+    sf.toggle_reminder(conn, user_id)
+    update.message.reply_text('Your reminders has been turned {}')
 
 def echo(update, context):
     """Echo the user message."""
