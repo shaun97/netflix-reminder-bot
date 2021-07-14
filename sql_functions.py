@@ -45,5 +45,8 @@ def toggle_reminder(conn, user_id):
     """
     cur = conn.cursor()
     # cur.execute(command)
-    print(cur.execute(command))
+    cur.execute(command)
+    curr_setting = cur.fetchone()
+    print(curr_setting)
     cur.close()
+    conn.commit()
