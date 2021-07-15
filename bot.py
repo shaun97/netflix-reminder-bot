@@ -54,12 +54,16 @@ def general(update, context):
 # Xenia commands
 
 def set_message(update, context):
+    #check admin before doing anything
     pass
 def set_frequency(update, context):
     pass
 def set_time(update, context):
     pass
 def set_remindees(update, context):
+    pass
+
+def view_remindees(update, context):
     pass
 
 def error(update, context):
